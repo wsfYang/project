@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eservice.iot.dao.ShuttleBusStaffMapper">
+  <resultMap id="BaseResultMap" type="com.eservice.iot.model.shuttle_bus_staff.ShuttleBusStaff">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="staff_id" jdbcType="VARCHAR" property="staffId" />
+    <result column="staff_name" jdbcType="VARCHAR" property="staffName" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="bus_num" jdbcType="VARCHAR" property="busNum" />
+  </resultMap>
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from `shuttle_bus_staff`
+    where 1=1
+    <if test="busStaff.staffName != null and busStaff.staffName !='' ">
+      and staff_name like concat('%','${busStaff.staffName}','%')
+    </if>
+    <if test="busStaff.busNum != null and busStaff.busNum !='' ">
+      and bus_num like concat('%','${busStaff.busNum}','%')
+    </if>
+  </select>
+</mapper>

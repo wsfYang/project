@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eservice.iot.dao.ShuttleBusMapper">
+  <resultMap id="BaseResultMap" type="com.eservice.iot.model.shuttle_bus.ShuttleBus">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="licence_num" jdbcType="VARCHAR" property="licenceNum" />
+    <result column="bus_num" jdbcType="VARCHAR" property="busNum" />
+    <result column="motorman" jdbcType="VARCHAR" property="motorman" />
+    <result column="circuit" jdbcType="VARCHAR" property="circuit" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="total_seat" jdbcType="VARCHAR" property="totalSeat" />
+    <result column="appointment_num" jdbcType="INTEGER" property="appointmentNum" />
+    <result column="fix_num" jdbcType="INTEGER" property="fixNum" />
+    <result column="password" jdbcType="INTEGER" property="password" />
+
+  </resultMap>
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from `shuttle_bus`
+    where 1=1
+    <if test = "shuttleBus.motorman != null and shuttleBus.motorman !='' ">
+      and motorman like concat('%','${shuttleBus.motorman}','%')
+    </if>
+    <if test="shuttleBus.busNum != null and shuttleBus.busNum !='' ">
+      and bus_num like concat('%','${shuttleBus.busNum}','%')
+    </if>
+  </select>
+  <select id="getBusNum" resultMap="BaseResultMap">
+     select `bus_num` from `shuttle_bus`
+  </select>
+</mapper>

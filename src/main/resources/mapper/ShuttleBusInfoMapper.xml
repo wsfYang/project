@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eservice.iot.dao.ShuttleBusInfoMapper">
+  <resultMap id="BaseResultMap" type="com.eservice.iot.model.shuttle_bus_info.ShuttleBusInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="staff_id" jdbcType="VARCHAR" property="staffId" />
+    <result column="bus_num" jdbcType="VARCHAR" property="busNum" />
+    <result column="staff_name" jdbcType="VARCHAR" property="staffName" />
+    <result column="riding_time" jdbcType="TIMESTAMP" property="ridingTime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <select id="selectList" resultMap="BaseResultMap">
+    select * from `shuttle_bus_info`
+    where 1=1
+    <if test="busInfo.staffName != null and busInfo.staffName !='' ">
+      and staff_name like concat('%','${busInfo.staffName}','%')
+    </if>
+    <if test="busInfo.busNum != null and busInfo.busNum !='' ">
+      and bus_num like concat('%','${busInfo.busNum}','%')
+    </if>
+    <if test="busInfo.ridingTime != null ">
+      and DATE(`riding_time`) = DATE(#{busInfo.ridingTime})
+    </if>
+  </select>
+</mapper>
